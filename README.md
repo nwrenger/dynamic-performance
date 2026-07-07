@@ -29,7 +29,7 @@ Dynamic Performance watches the server's average tick time in milliseconds per t
 
 When the configured lag threshold is reached, the mod scales down the first available performance level. When the server has recovered below the recovery threshold, it scales settings back up in reverse order.
 
-The scaling order can be set in the configuration file.
+The scaling order can be set in the configuration file. See the [Configuration](#configuration) section for more details.
 
 # Installation
 
@@ -37,6 +37,12 @@ After adding mod to your world or server, you should be able to open the about p
 
 ```mcfunction
 /dp about
+```
+
+or
+
+```mcfunction
+/dynamicperformance about
 ```
 
 ![about_panel](showcase/about_panel.png)
@@ -47,6 +53,12 @@ The current performance state, MSPT, view distance, simulation distance, and mob
 
 ```mcfunction
 /dp status
+```
+
+or
+
+```mcfunction
+/dynamicperformance status
 ```
 
 ![status_panel](showcase/status_panel.png)
