@@ -81,6 +81,8 @@ A config file is created at:
 ./config/dynamic-performance.json
 ```
 
+> After editing the file, **restart the server/game** to apply changes.
+
 Default contents:
 
 ```json
