@@ -2,7 +2,7 @@ package io.github.nwrenger.dynamicperformance;
 
 import io.github.nwrenger.dynamicperformance.level.Level;
 import io.github.nwrenger.dynamicperformance.platform.Services;
-import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.players.PlayerList;
 import org.jspecify.annotations.NonNull;
@@ -29,8 +29,8 @@ public class Common {
         Constants.LOG.info("[Dynamic Performance] Started successfully");
     }
 
-    public static Identifier id(@NonNull String path) {
-        return Identifier.fromNamespaceAndPath(Constants.MOD_ID, path);
+    public static ResourceLocation id(@NonNull String path) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path);
     }
 
     public static void tick(MinecraftServer server) {

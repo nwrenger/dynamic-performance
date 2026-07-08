@@ -17,6 +17,7 @@ neoForge {
 }
 
 dependencies {
+    compileOnly group: 'org.jspecify', name: 'jspecify', version: '1.0.0'
     // Fabric and NeoForge both bundle Fabric Mixin, so it is safe to use it in common
     // If you need to update, check what version they are using to see what is compatible
     // https://github.com/neoforged/NeoForge/blob/1.21.x/gradle.properties#L37

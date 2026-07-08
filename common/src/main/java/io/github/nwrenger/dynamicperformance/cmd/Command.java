@@ -15,7 +15,6 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextColor;
-import net.minecraft.server.permissions.Permissions;
 
 public final class Command {
     private Command() {
@@ -28,7 +27,7 @@ public final class Command {
 
     private static LiteralArgumentBuilder<CommandSourceStack> createRoot(@NonNull String name, Config config) {
         return Commands.literal(name)
-                .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
+                .requires(source -> source.hasPermission(2))
                 .executes(context -> {
                     context.getSource().sendFailure(
                             Component.literal("Please specify a subcommand. Use `/%1$s about` or `/%1$s status`.".formatted(name))
