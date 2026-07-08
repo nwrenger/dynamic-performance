@@ -1,8 +1,8 @@
 # Dynamic Performance
 
-[![modrinth](https://img.shields.io/modrinth/v/dynamic-performance.svg)](https://modrinth.com/datapack/dynamic-performance)
-[![modrinth](https://img.shields.io/badge/dynamic/json?url=https://api.modrinth.com/v2/project/dynamic-performance&label=downloads&query=$.downloads&color=#00AF5C)](https://modrinth.com/datapack/dynamic-performance)
-[![modrinth](https://img.shields.io/modrinth/game-versions/dynamic-performance.svg)](https://modrinth.com/datapack/dynamic-performance)
+[![modrinth](https://img.shields.io/modrinth/v/dynamic-performance.svg)](https://modrinth.com/mod/dynamic-performance)
+[![modrinth](https://img.shields.io/badge/dynamic/json?url=https://api.modrinth.com/v2/project/dynamic-performance&label=downloads&query=$.downloads&color=#00AF5C)](https://modrinth.com/mod/dynamic-performance)
+[![modrinth](https://img.shields.io/modrinth/game-versions/dynamic-performance.svg)](https://modrinth.com/mod/dynamic-performance)
 
 A lightweight **performance mod** that keeps gameplay close to **vanilla** with adaptive **view distance**, **simulation distance**, and **mob cap** based on the server's **MSPT**.
 
