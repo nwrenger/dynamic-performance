@@ -9,6 +9,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
 import io.github.nwrenger.dynamicperformance.Config;
+import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.ClickEvent;
@@ -31,7 +32,7 @@ public final class Command {
                 .executes(context -> {
                     context.getSource().sendFailure(
                             Component.literal("Please specify a subcommand. Use `/%1$s about` or `/%1$s status`.".formatted(name))
-                                    .withStyle(style -> style.withColor(TextColor.RED)));
+                                    .withStyle(style -> style.withColor(TextColor.fromLegacyFormat(ChatFormatting.RED))));
                     return 1;
                 })
                 .then(Commands.literal("about")
