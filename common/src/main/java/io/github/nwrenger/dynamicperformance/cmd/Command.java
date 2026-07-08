@@ -1,6 +1,5 @@
 package io.github.nwrenger.dynamicperformance.cmd;
 
-import java.net.URI;
 import java.util.Objects;
 
 import org.jspecify.annotations.NonNull;
@@ -42,6 +41,6 @@ public final class Command {
 
     @NonNull
     public static ClickEvent openUrl(String url) {
-        return new ClickEvent.OpenUrl(Objects.requireNonNull(URI.create(url)));
+        return new ClickEvent(ClickEvent.Action.OPEN_URL, Objects.requireNonNull(url));
     }
 }

@@ -1,5 +1,7 @@
 package io.github.nwrenger.dynamicperformance.cmd;
 
+import java.util.Objects;
+
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.ClickEvent;
@@ -89,6 +91,6 @@ public final class AboutCommand {
 
     @NonNull
     private static ClickEvent runCommand(@NonNull String command) {
-        return new ClickEvent.RunCommand(command);
+        return new ClickEvent(ClickEvent.Action.RUN_COMMAND, Objects.requireNonNull(command));
     }
 }
