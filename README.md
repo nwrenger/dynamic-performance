@@ -27,9 +27,11 @@ A lightweight **performance mod** that keeps gameplay close to **vanilla** with 
 
 Dynamic Performance watches the server's average tick time in milliseconds per tick (MSPT). A healthy Minecraft server targets 20 TPS, which means each tick should stay below 50 ms.
 
-When the configured lag threshold is reached, the mod scales down the first available performance level. When the server has recovered below the recovery threshold, it scales settings back up in reverse order.
+When the configured lag threshold is reached, the mod starts with the first available performance level and continues further through the list if more reductions are needed. When the server has recovered below the recovery threshold, it scales settings back up in reverse order.
 
-The scaling order can be set in the configuration file. See the [Configuration](#configuration) section for more details.
+If the MSPT stays between the lag and recovery thresholds, no scaling changes are made. At that point, the server is considered stable. See the [Performance States](#performance-states) section for more details.
+
+The scaling order can be set in the configuration file, which is covered in the [Configuration](#configuration) section.
 
 # Installation
 
@@ -129,9 +131,9 @@ Default contents:
 
 ### Options
 
-- `interval`: How often, in seconds, the server performance is checked.
-- `lag_threshold`: MSPT value at which Dynamic Performance starts scaling down.
-- `recovery_threshold`: MSPT value below which Dynamic Performance starts scaling back up.
+- `interval`: How often, in seconds, the server performance is checked and adjusted.
+- `lag_threshold`: MSPT value at which scaling down starts.
+- `recovery_threshold`: MSPT value below which scaling back up starts.
 - `levels`: Ordered scaling rules for view distance, simulation distance, and mob cap percentage.
 
 ### Level Types
@@ -148,7 +150,7 @@ Each level has:
 - `min`: Lowest value the mod may reduce this setting to.
 - `increment`: Step size used when scaling up or down.
 
-> The order matters. Dynamic Performance scales down from top to bottom and scales back up from bottom to top.
+> The order matters. Scaling down follows the list from top to bottom, while scaling back up follows it from bottom to top.
 
 ## Contributing & Issues
 
