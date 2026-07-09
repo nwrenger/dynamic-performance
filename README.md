@@ -71,9 +71,9 @@ The following performance states get reported:
 
 - `Optimal`: Server performance is healthy and all configured levels are restored.
 - `Stable`: Server performance is between the recovery and lag thresholds.
-- `Scaling Down`: Server MSPT is high and Dynamic Performance can still reduce settings.
+- `Scaling Down`: Server MSPT is high and settings can still be reduced.
 - `Lagging`: Server MSPT is high, but all configured levels are already at their minimum values.
-- `Scaling Up`: Server performance has recovered and Dynamic Performance can restore settings.
+- `Scaling Up`: Server performance has recovered and settings can be restored.
 
 ## Configuration
 
