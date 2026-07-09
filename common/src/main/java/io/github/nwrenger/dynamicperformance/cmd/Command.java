@@ -12,8 +12,6 @@ import io.github.nwrenger.dynamicperformance.Config;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.ClickEvent;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.server.permissions.Permissions;
 
 public final class Command {
@@ -28,12 +26,6 @@ public final class Command {
     private static LiteralArgumentBuilder<CommandSourceStack> createRoot(@NonNull String name, Config config) {
         return Commands.literal(name)
                 .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER))
-                .executes(context -> {
-                    context.getSource().sendFailure(
-                            Component.literal("Please specify a subcommand. Use `/%1$s about` or `/%1$s status`.".formatted(name))
-                                    .withStyle(style -> style.withColor(TextColor.RED)));
-                    return 1;
-                })
                 .then(Commands.literal("about")
                         .executes(context -> AboutCommand.run(context.getSource())))
                 .then(Commands.literal("status")
