@@ -8,5 +8,4 @@ public class Constants {
     public static final String MOD_ID = "dynamic_performance";
     public static final String MOD_NAME = "Dynamic Performance";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
-
 }

@@ -24,12 +24,21 @@ public class Services {
     // FabricPlatformHelper.
     public static <T> T load(Class<T> clazz) {
         final T loadedService = ServiceLoader.load(
-                clazz,
-                Services.class.getClassLoader())
-                .findFirst()
-                .orElseThrow(() -> new NullPointerException(
-                        "[Dynamic Performance] Failed to load service for " + clazz.getName()));
-        Constants.LOG.debug("[Dynamic Performance] Loaded {} for service {}", loadedService, clazz);
+            clazz,
+            Services.class.getClassLoader()
+        )
+            .findFirst()
+            .orElseThrow(() ->
+                new NullPointerException(
+                    "[Dynamic Performance] Failed to load service for " +
+                        clazz.getName()
+                )
+            );
+        Constants.LOG.debug(
+            "[Dynamic Performance] Loaded {} for service {}",
+            loadedService,
+            clazz
+        );
         return loadedService;
     }
 }

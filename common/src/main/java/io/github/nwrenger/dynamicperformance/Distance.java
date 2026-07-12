@@ -5,12 +5,9 @@ import net.minecraft.server.players.PlayerList;
 
 public class Distance {
 
-    public static void setView(
-        PlayerList playerList,
-        int value
-    ) {
+    public static void setView(PlayerList playerList, int value) {
         playerList.setViewDistance(value);
-        
+
         // Update the client-side view distance if this is a physical client
         if (Services.PLATFORM.isPhysicalClient()) {
             net.minecraft.client.Minecraft.getInstance()
@@ -24,10 +21,7 @@ public class Distance {
         );
     }
 
-    public static void setSimulation(
-        PlayerList playerList,
-        int value
-    ) {
+    public static void setSimulation(PlayerList playerList, int value) {
         playerList.setSimulationDistance(value);
 
         // Update the client-side simulation distance if this is a physical client
