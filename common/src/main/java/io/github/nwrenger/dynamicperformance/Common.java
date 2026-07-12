@@ -2,6 +2,7 @@ package io.github.nwrenger.dynamicperformance;
 
 import io.github.nwrenger.dynamicperformance.level.Level;
 import io.github.nwrenger.dynamicperformance.platform.Services;
+import java.util.Objects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.players.PlayerList;
@@ -14,13 +15,10 @@ public class Common {
     private static int tickCount = 0;
 
     public static void init() {
-        config = Config.load();
-
-        // Validate the config to ensure that all values are within acceptable ranges
-        Config.validate(config);
+        loadConfig();
 
         // Command registration for the `/dp` and `/dynamicperformance` commands
-        Services.PLATFORM.registerCommands(config);
+        Services.PLATFORM.registerCommands();
 
         // Register a server tick event to check the tick rate and adjust performance
         // settings accordingly
@@ -31,6 +29,21 @@ public class Common {
 
     public static ResourceLocation id(@NonNull String path) {
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, path);
+    }
+
+    public static void loadConfig() {
+        // Load and update state
+        Config newConfig = Config.load();
+
+        // Validate the config to ensure that all values are within acceptable ranges
+        Config.validate(newConfig);
+
+        // All is validated, so apply
+        config = newConfig;
+    }
+
+    public static Config getConfig() {
+        return Objects.requireNonNull(config);
     }
 
     public static void tick(MinecraftServer server) {
@@ -47,7 +60,7 @@ public class Common {
 
         if (mspt >= config.lag_threshold) {
             scaleDown(server.getPlayerList());
-        } else if (mspt < config.recovery_threshold) {
+        } else if (mspt <= config.recovery_threshold) {
             scaleUp(server.getPlayerList());
         }
     }
@@ -137,14 +150,16 @@ public class Common {
     }
 
     private static void applyValue(
-            PlayerList playerList,
-            Level level,
-            int value) {
+        PlayerList playerList,
+        Level level,
+        int value
+    ) {
         switch (level.type) {
             case VIEW_DISTANCE -> Distance.setView(playerList, value);
             case SIMULATION_DISTANCE -> Distance.setSimulation(
-                    playerList,
-                    value);
+                playerList,
+                value
+            );
             case MOB_CAP_PERCENTAGE -> MobCap.setPercentage(value);
         }
     }

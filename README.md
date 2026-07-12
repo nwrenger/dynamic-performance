@@ -18,8 +18,8 @@ A lightweight **performance mod** that keeps gameplay close to **vanilla** with 
    Only checks performance on a configurable interval instead of running heavy logic every tick.
 4. **Flexible and Compatible**:
    Works on dedicated servers, in singleplayer, and larger Fabric or NeoForge modded setups.
-5. **Visible Performance State**:
-   Includes in-game commands for checking the current optimization state.
+5. **Visible Performance Controls**:
+   Includes in-game commands for checking the current optimization state, reviewing the active config, and reloading config changes.
 
 > **TL;DR**: Keeps your server vanilla and feeling responsive, even during busy moments.
 
@@ -33,7 +33,7 @@ If the MSPT stays between the lag and recovery thresholds, no scaling changes ar
 
 The scaling order can be set in the configuration file, which is covered in the [Configuration](#configuration) section.
 
-# Installation
+## Installation
 
 After adding mod to your world or server, you should be able to open the about panel, which is fully controllable with the mouse:
 
@@ -83,8 +83,6 @@ A config file is created at:
 ./config/dynamic-performance.json
 ```
 
-> After editing the file, **restart the server/game** to apply changes.
-
 Default contents:
 
 ```json
@@ -133,7 +131,7 @@ Default contents:
 
 - `interval`: How often, in seconds, the server performance is checked and adjusted.
 - `lag_threshold`: MSPT value at which scaling down starts.
-- `recovery_threshold`: MSPT value below which scaling back up starts.
+- `recovery_threshold`: MSPT value at or below which scaling back up starts.
 - `levels`: Ordered scaling rules for view distance, simulation distance, and mob cap percentage.
 
 ### Level Types
@@ -151,6 +149,40 @@ Each level has:
 - `increment`: Step size used when scaling up or down.
 
 > The order matters. Scaling down follows the list from top to bottom, while scaling back up follows it from bottom to top.
+
+### Active Configuration
+
+The active configuration can be reviewed in-game with:
+
+```mcfunction
+/dp config
+```
+
+or
+
+```mcfunction
+/dynamicperformance config
+```
+
+![config_panel](showcase/config_panel.png)
+
+> The screenshot shows the default config listed above.
+
+### Reload
+
+After editing the config file, apply changes without restarting by running:
+
+```mcfunction
+/dp reload
+```
+
+or
+
+```mcfunction
+/dynamicperformance reload
+```
+
+> If the config is invalid, the command reports the error and keeps the previous valid config active.
 
 ## Contributing & Issues
 

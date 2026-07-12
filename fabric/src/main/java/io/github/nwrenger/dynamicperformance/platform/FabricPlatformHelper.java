@@ -1,6 +1,5 @@
 package io.github.nwrenger.dynamicperformance.platform;
 
-import io.github.nwrenger.dynamicperformance.Config;
 import io.github.nwrenger.dynamicperformance.cmd.Command;
 import io.github.nwrenger.dynamicperformance.platform.services.IPlatformHelper;
 import java.nio.file.Path;
@@ -41,10 +40,10 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public void registerCommands(Config config) {
+    public void registerCommands() {
         CommandRegistrationCallback.EVENT.register(
             (dispatcher, registryAccess, environment) ->
-                Command.register(dispatcher, config)
+                Command.register(dispatcher)
         );
     }
 

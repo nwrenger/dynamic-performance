@@ -1,11 +1,9 @@
 package io.github.nwrenger.dynamicperformance.platform;
 
-import java.nio.file.Path;
-import java.util.function.Consumer;
-
-import io.github.nwrenger.dynamicperformance.Config;
 import io.github.nwrenger.dynamicperformance.cmd.Command;
 import io.github.nwrenger.dynamicperformance.platform.services.IPlatformHelper;
+import java.nio.file.Path;
+import java.util.function.Consumer;
 import net.minecraft.server.MinecraftServer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.ModList;
@@ -20,7 +18,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public String getPlatformName() {
-
         return "NeoForge";
     }
 
@@ -31,7 +28,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isModLoaded(String modId) {
-
         return ModList.get().isLoaded(modId);
     }
 
@@ -42,19 +38,20 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isDevelopmentEnvironment() {
-
         return !FMLLoader.isProduction();
     }
 
     @Override
-    public void registerCommands(Config config) {
-        NeoForge.EVENT_BUS
-                .addListener((RegisterCommandsEvent event) -> Command.register(event.getDispatcher(), config));
+    public void registerCommands() {
+        NeoForge.EVENT_BUS.addListener((RegisterCommandsEvent event) ->
+            Command.register(event.getDispatcher())
+        );
     }
 
     @Override
     public void registerEndServerTick(Consumer<MinecraftServer> listener) {
-        NeoForge.EVENT_BUS.addListener((ServerTickEvent.Post event) -> listener.accept(event.getServer()));
+        NeoForge.EVENT_BUS.addListener((ServerTickEvent.Post event) ->
+            listener.accept(event.getServer())
+        );
     }
-
 }

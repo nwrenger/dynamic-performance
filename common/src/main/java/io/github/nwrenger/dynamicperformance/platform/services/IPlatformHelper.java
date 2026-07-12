@@ -1,6 +1,5 @@
 package io.github.nwrenger.dynamicperformance.platform.services;
 
-import io.github.nwrenger.dynamicperformance.Config;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 import net.minecraft.server.MinecraftServer;
@@ -53,10 +52,8 @@ public interface IPlatformHelper {
 
     /**
      * Registers commands for the mod.
-     *
-     * @param config The configuration object to use for command registration.
      */
-    void registerCommands(Config config);
+    void registerCommands();
 
     /**
      * Registers a listener for the end of the server tick event.
