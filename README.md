@@ -4,38 +4,34 @@
 [![modrinth](https://img.shields.io/badge/dynamic/json?url=https://api.modrinth.com/v2/project/dynamic-performance&label=downloads&query=$.downloads&color=#00AF5C)](https://modrinth.com/mod/dynamic-performance)
 [![modrinth](https://img.shields.io/modrinth/game-versions/dynamic-performance.svg)](https://modrinth.com/mod/dynamic-performance)
 
-A lightweight **performance mod** that keeps gameplay close to **vanilla** with adaptive **view distance**, **simulation distance**, and **mob cap** based on the server's **MSPT**.
+A **vanilla-preserving** and **lightweight** performance mod that **dynamically** adjusts **view distance**, **simulation distance**, and the **mob cap** based on the server's **load**.
 
-> Ideal for server owners who want to stay close to vanilla while still having great server performance without disabling gameplay features, forcing restarts, or constantly changing settings by hand.
+> Ideal for server owners who want to keep the best possible playing experience even on weaker hardware.
 
 ## Why use this mod?
 
-1. **Automatic lag reduction**:
-   Dynamically lowers simulation distance, view distance, and mob caps when needed to keep the server from lagging.
-2. **Server-friendly scaling**:
-   Uses configurable performance levels, allowing you to control exactly what gets reduced first and how far it may go.
-3. **Lightweight and passive**:
-   Only checks performance on a configurable interval instead of running heavy logic every tick.
-4. **Flexible and Compatible**:
-   Works on dedicated servers, in singleplayer, and larger Fabric or NeoForge modded setups.
-5. **Visible Performance Controls**:
-   Includes in-game commands for checking the current optimization state, reviewing the active config, and reloading config changes.
-
-> **TL;DR**: Keeps your server vanilla and feeling responsive, even during busy moments.
+1. **Dynamic Scaling**:
+   By checking the server's MSPT (milliseconds per tick), it dynamically scales to ideal settings, ensuring that the server runs as well as it is able to.
+2. **Extensible Configuration**:
+   The kind of scaling, as well as the check interval, is fully configurable for your hardware's capabilities.
+3. **Flexible and Compatible**:
+   This mod works in singleplayer and multiplayer, supports Fabric and NeoForge, and is compatible with all other performance mods.
+4. **Comprehensible**:
+   By using the provided commands to check the current server status, review the active config, and reload config changes, it's easy to understand exactly what's going on.
 
 ## How it works
 
-Dynamic Performance watches the server's average tick time in milliseconds per tick (MSPT). A healthy Minecraft server targets 20 TPS, which means each tick should stay below 50 ms.
+Dynamic Performance monitors the current MSPT by checking it every 15 seconds or so. For further information, consult the [Configuration](#configuration) section.
 
-When the configured lag threshold is reached, the mod starts with the first available performance level and continues further through the list if more reductions are needed. When the server has recovered below the recovery threshold, it scales settings back up in reverse order.
+> Side Info: A healthy server targets 20 TPS (ticks per second) and, therefore, 50 MSPT at max. So, the lag threshold should be around this value.
 
-If the MSPT stays between the lag and recovery thresholds, no scaling changes are made. At that point, the server is considered stable. See the [Performance States](#performance-states) section for more details.
+Furthermore, if the MSPT exceeds the lag threshold, the server starts scaling down as configured in the performance levels until it no longer exceeds the threshold. The same is true for recovery: If the MSPT is lower than the recovery threshold, the server starts scaling up based on the mentioned levels, now in reverse.
 
-The scaling order can be set in the configuration file, which is covered in the [Configuration](#configuration) section.
+If the MSPT stays between the lag and recovery thresholds, no scaling changes are made. The server is then considered stable. See the [Performance States](#performance-states) section for more details.
 
 ## Installation
 
-After adding mod to your world or server, you should be able to open the about panel, which is fully controllable with the mouse:
+After adding the mod to your world or server, you should be able to open the about panel, which is fully controllable with the mouse:
 
 ```mcfunction
 /dp about
@@ -67,13 +63,13 @@ or
 
 ### Performance States
 
-The following performance states get reported:
+The following performance states are reported:
 
-- `Optimal`: Server performance is healthy and all configured levels are restored.
-- `Stable`: Server performance is between the recovery and lag thresholds.
-- `Scaling Down`: Server MSPT is high and settings can still be reduced.
-- `Lagging`: Server MSPT is high, but all configured levels are already at their minimum values.
-- `Scaling Up`: Server performance has recovered and settings can be restored.
+- `Optimal`: All configured levels are restored.
+- `Stable`: MSPT is between the recovery and lag thresholds.
+- `Scaling Down`: MSPT is high and settings can still be reduced.
+- `Lagging`: MSPT is high, but all configured levels are already at their minimum values.
+- `Scaling Up`: Settings are being restored.
 
 ## Configuration
 
