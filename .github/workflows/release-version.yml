@@ -15,7 +15,7 @@ on:
           - main
           - 1.21.11
           - 1.21.9
-          - 1.21.1
+          - "1.21"
       release_notes:
         description: Optional Markdown release description
         required: false
